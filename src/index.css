@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.015em;
+  }
+
+  body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+
+  html.dark body {
+    background-color: #05060A;
+    color: #f8fafc;
+  }
+
+  /* Prevent awkward selection on buttons and icons, while allowing text selection */
+  button, nav, .interactive-pill, .select-none {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Enable smooth high-contrast selection for code and text */
+  ::selection {
+    background-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  html.dark ::selection {
+    background-color: #00F2FE;
+    color: #05060A;
+  }
+
+  /* Hide scrollbars for clean carousel */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Glassmorphic cockpit surface */
+.cockpit-surface {
+  background: rgba(12, 14, 23, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.cockpit-surface-elevated {
+  background: rgba(18, 22, 36, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+}
+
+/* Gradient text helpers */
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-flame {
+  background: linear-gradient(135deg, #FF4500 0%, #FF8C00 50%, #FBBF24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
