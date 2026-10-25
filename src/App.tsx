@@ -197,16 +197,16 @@ export function App() {
   const isDark = state.theme === 'dark';
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 flex flex-col items-center justify-start ${
-      isDark ? 'bg-cyber-bg text-white' : 'bg-slate-100 text-slate-900'
+    <div className={`min-h-screen transition-colors duration-150 flex flex-col items-center justify-start ${
+      isDark ? 'bg-[#09090B] text-neutral-100' : 'bg-[#F9FAFB] text-neutral-900'
     }`}>
-      {/* Container (Mobile Shell or Expanded View) */}
-      <div className={`w-full transition-all duration-300 relative flex flex-col min-h-screen ${
+      {/* Container (Edge-to-Edge on Mobile, Refined Frame on Desktop) */}
+      <div className={`w-full transition-all duration-200 relative flex flex-col min-h-screen ${
         state.viewMode === 'mobile-shell'
           ? isDark 
-            ? 'max-w-[430px] sm:my-5 sm:rounded-[44px] sm:shadow-cockpit sm:border sm:border-white/[0.12] sm:overflow-hidden sm:min-h-[890px] bg-cyber-bg'
-            : 'max-w-[430px] sm:my-5 sm:rounded-[44px] sm:shadow-2xl sm:border sm:border-slate-200 sm:overflow-hidden sm:min-h-[890px] bg-white text-slate-900'
-          : isDark ? 'max-w-3xl bg-cyber-bg' : 'max-w-3xl bg-white text-slate-900 shadow-md'
+            ? 'w-full sm:max-w-[480px] sm:my-6 sm:border sm:border-neutral-800 sm:shadow-2xl sm:min-h-[920px] bg-[#09090B]'
+            : 'w-full sm:max-w-[480px] sm:my-6 sm:border sm:border-neutral-300 sm:shadow-xl sm:min-h-[920px] bg-white text-neutral-900'
+          : isDark ? 'w-full sm:max-w-4xl bg-[#09090B] sm:border-x sm:border-neutral-800/60' : 'w-full sm:max-w-4xl bg-white text-neutral-900 sm:border-x sm:border-neutral-200 shadow-sm'
       }`}>
         {/* Cockpit Header */}
         <CockpitHeader

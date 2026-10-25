@@ -11,14 +11,19 @@
   }
 
   body {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: #F9FAFB;
+    color: #0F172A;
     overflow-x: hidden;
   }
 
   html.dark body {
-    background-color: #05060A;
-    color: #f8fafc;
+    background-color: #09090B;
+    color: #F4F4F5;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.025em;
   }
 
   /* Prevent awkward selection on buttons and icons, while allowing text selection */
@@ -27,15 +32,15 @@
     -webkit-user-select: none;
   }
 
-  /* Enable smooth high-contrast selection for code and text */
+  /* High-contrast Swiss selection */
   ::selection {
-    background-color: #3b82f6;
-    color: #ffffff;
+    background-color: #1D4ED8;
+    color: #FFFFFF;
   }
 
   html.dark ::selection {
-    background-color: #00F2FE;
-    color: #05060A;
+    background-color: #3B82F6;
+    color: #09090B;
   }
 
   /* Hide scrollbars for clean carousel */
@@ -48,38 +53,43 @@
   }
 }
 
-/* Glassmorphic cockpit surface */
-.cockpit-surface {
-  background: rgba(12, 14, 23, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+/* Swiss Architectural Gallery Surfaces */
+.swiss-surface {
+  background: #111114;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.swiss-surface-elevated {
+  background: #17181D;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+}
+
+.cockpit-surface {
+  background: #111114;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 .cockpit-surface-elevated {
-  background: rgba(18, 22, 36, 0.85);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: #17181D;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Gradient text helpers */
-.gradient-text-cyan {
-  background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Typographic Art Accent Helpers */
+.art-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.gradient-text-flame {
-  background: linear-gradient(135deg, #FF4500 0%, #FF8C00 50%, #FBBF24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hairline-b {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.gradient-text-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hairline-r {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }

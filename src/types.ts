@@ -71,7 +71,7 @@ export interface TimerSession {
 }
 
 export interface ActiveSprintTimer {
-  activeStep: number; // 0=Shield, 1=B1, 2=Breather, 3=B2, 4=Victory
+  activeStep: number; // 1=Block 1 (45m), 2=Breather (5m), 3=Block 2 (45m), 4=Archive/Victory
   b1Seconds: number;
   b1Running: boolean;
   breatherSeconds: number;
@@ -88,7 +88,7 @@ export interface AppState {
   streakCount: number;
   lastCompletedDate?: string;
   completedTaskIds: string[];
-  dopamineShieldStatus: Record<string, boolean>; // key: "week-X-saturday" -> boolean
+  dopamineShieldStatus?: Record<string, boolean>; // deprecated backward-compat
   reflections: Record<string, string>; // key: "week-X-saturday" -> answer
   customTasks: Record<string, Task[]>; // key: "week-X-saturday" -> Task[]
   checkedActionItems?: Record<string, number[]>; // key: taskId -> checked index array

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Check, ChevronRight, ChevronLeft } from 'lucide-react';
 import { CURRICULUM_DATA } from '../data/curriculumData';
 import { sound } from '../utils/sound';
 
@@ -37,55 +36,55 @@ export const WeekCarousel: React.FC<WeekCarouselProps> = ({
     }
   };
 
-  const getPhaseName = (phase: number) => {
+  const getPhaseShort = (phase: number) => {
     switch (phase) {
-      case 1: return 'P1: Code Muscle';
-      case 2: return 'P2: Distributed & RAG';
-      case 3: return 'P3: 20 LPA Bar-Raiser';
+      case 1: return 'P1 // CODE MUSCLE';
+      case 2: return 'P2 // SCALE & RAG';
+      case 3: return 'P3 // BAR-RAISER';
       default: return '';
     }
   };
 
   return (
-    <div className={`px-4 py-2.5 border-b transition-colors duration-200 ${
+    <div className={`px-3.5 sm:px-6 py-2.5 border-b font-mono transition-colors duration-150 ${
       isDark 
-        ? 'border-white/[0.06] bg-cyber-bg/70 backdrop-blur-xl' 
-        : 'border-slate-200 bg-slate-50/90 backdrop-blur-xl shadow-inner'
+        ? 'border-white/[0.08] bg-[#09090B]' 
+        : 'border-neutral-200 bg-neutral-50'
     }`}>
       <div className="flex items-center justify-between text-xs mb-2">
         <div className="flex items-center gap-2">
-          <span className={`font-extrabold text-[11px] uppercase tracking-wider ${
-            isDark ? 'text-zinc-400' : 'text-slate-600'
+          <span className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-wider ${
+            isDark ? 'text-neutral-400' : 'text-neutral-600'
           }`}>
-            16-Week Horizon
+            Horizon Matrix
           </span>
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-            isDark ? 'bg-cyber-cyan/15 text-cyber-cyan' : 'bg-cyan-100 text-cyan-800'
+          <span className={`text-[9px] sm:text-[10px] px-1.5 py-0.5 border ${
+            isDark ? 'border-neutral-700 bg-neutral-900 text-white' : 'border-neutral-300 bg-white text-neutral-950 font-bold'
           }`}>
-            Week {currentWeek} of 16
+            WK {String(currentWeek).padStart(2, '0')} / 16
           </span>
         </div>
 
         {/* Scroll Chevrons */}
         <div className="flex items-center gap-1">
           <button
-            onClick={() => scrollBy(-200)}
-            aria-label="Scroll weeks left"
-            className={`p-1 rounded-lg border transition-colors ${
+            onClick={() => scrollBy(-180)}
+            aria-label="Previous weeks"
+            className={`p-1.5 border transition-colors min-h-[30px] min-w-[30px] flex items-center justify-center ${
               isDark 
-                ? 'border-white/10 text-zinc-400 hover:text-white hover:bg-white/5' 
-                : 'border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                ? 'border-neutral-800 text-neutral-400 hover:text-white active:bg-neutral-800' 
+                : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 active:bg-neutral-200'
             }`}
           >
             <ChevronLeft className="w-3.5 h-3.5" />
           </button>
           <button
-            onClick={() => scrollBy(200)}
-            aria-label="Scroll weeks right"
-            className={`p-1 rounded-lg border transition-colors ${
+            onClick={() => scrollBy(180)}
+            aria-label="Next weeks"
+            className={`p-1.5 border transition-colors min-h-[30px] min-w-[30px] flex items-center justify-center ${
               isDark 
-                ? 'border-white/10 text-zinc-400 hover:text-white hover:bg-white/5' 
-                : 'border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                ? 'border-neutral-800 text-neutral-400 hover:text-white active:bg-neutral-800' 
+                : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 active:bg-neutral-200'
             }`}
           >
             <ChevronRight className="w-3.5 h-3.5" />
@@ -93,9 +92,10 @@ export const WeekCarousel: React.FC<WeekCarouselProps> = ({
         </div>
       </div>
 
+      {/* Snap-Scrolling Horizon Bar */}
       <div 
         ref={containerRef}
-        className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 scroll-smooth"
+        className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 scroll-smooth snap-x snap-mandatory touch-pan-x"
       >
         {CURRICULUM_DATA.map((week) => {
           const isSelected = currentWeek === week.weekNumber;
@@ -109,63 +109,55 @@ export const WeekCarousel: React.FC<WeekCarouselProps> = ({
           const isComplete = completedCount === 4;
 
           return (
-            <motion.button
+            <button
               key={week.weekNumber}
               ref={isSelected ? selectedButtonRef : undefined}
-              whileTap={{ scale: 0.94 }}
               onClick={() => {
                 sound.playTactileClick();
                 onSelectWeek(week.weekNumber);
               }}
-              className={`relative shrink-0 p-2.5 rounded-2xl border text-left transition-all min-w-[105px] ${
+              className={`snap-start relative shrink-0 p-2 sm:p-2.5 border text-left transition-all min-w-[94px] sm:min-w-[104px] min-h-[58px] ${
                 isSelected
                   ? isDark
-                    ? 'bg-cyber-cardElevated border-cyber-cyan/50 shadow-neon-cyan'
-                    : 'bg-white border-cyan-500 shadow-md ring-2 ring-cyan-400/20 text-slate-900'
+                    ? 'border-white bg-neutral-900 text-white'
+                    : 'border-neutral-950 bg-white text-neutral-950 ring-1 ring-neutral-950'
                   : isDark
-                    ? 'bg-cyber-card border-white/[0.06] text-zinc-400 hover:border-white/15'
-                    : 'bg-white/80 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-white shadow-sm'
+                    ? 'border-neutral-800/80 bg-neutral-950/60 text-neutral-400 hover:border-neutral-700 active:border-neutral-500'
+                    : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 active:border-neutral-500'
               }`}
             >
-              {/* Active Indicator Top Light */}
-              {isSelected && (
-                <div className={`absolute -top-1 left-3 right-3 h-0.5 rounded-full ${
-                  isDark ? 'bg-cyber-cyan shadow-sm' : 'bg-cyan-500'
-                }`} />
-              )}
-
               <div className="flex items-center justify-between mb-1">
-                <span className={`font-mono text-xs font-black ${
+                <span className={`text-[11px] sm:text-xs font-bold tracking-tight ${
                   isSelected 
-                    ? isDark ? 'text-cyber-cyan' : 'text-cyan-700'
-                    : isDark ? 'text-zinc-300' : 'text-slate-800'
+                    ? isDark ? 'text-white' : 'text-neutral-950'
+                    : isDark ? 'text-neutral-300' : 'text-neutral-700'
                 }`}>
-                  Week {week.weekNumber}
+                  WK {String(week.weekNumber).padStart(2, '0')}
                 </span>
 
                 {isComplete ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span className="flex items-center text-emerald-500 font-bold text-[10px]">
+                    <Check className="w-3 h-3 stroke-[3]" />
+                  </span>
                 ) : (
-                  <span className={`text-[10px] font-mono ${isDark ? 'text-zinc-500' : 'text-slate-500'}`}>
+                  <span className="text-[9px] sm:text-[10px] text-neutral-500 tabular-nums">
                     {completedCount}/4
                   </span>
                 )}
               </div>
 
-              <div className={`text-[9px] font-bold truncate ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
-                {getPhaseName(week.phase)}
+              <div className="text-[8px] sm:text-[9px] uppercase tracking-wider text-neutral-500 truncate">
+                {getPhaseShort(week.phase)}
               </div>
 
-              {/* Progress bar inside card */}
-              <div className={`w-full rounded-full h-1 mt-1.5 overflow-hidden ${
-                isDark ? 'bg-zinc-800' : 'bg-slate-200'
-              }`}>
+              {/* Minimalist Hairline Progress Bar */}
+              <div className={`w-full h-0.5 mt-2 ${isDark ? 'bg-neutral-800' : 'bg-neutral-200'}`}>
                 <div 
-                  className={`h-full rounded-full ${isComplete ? 'bg-emerald-500' : isDark ? 'bg-cyber-cyan' : 'bg-cyan-600'}`}
+                  className={`h-full ${isComplete ? 'bg-emerald-500' : isDark ? 'bg-white' : 'bg-neutral-950'}`}
                   style={{ width: `${(completedCount / 4) * 100}%` }}
                 />
               </div>
-            </motion.button>
+            </button>
           );
         })}
       </div>

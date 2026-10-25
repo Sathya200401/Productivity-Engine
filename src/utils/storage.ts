@@ -38,7 +38,7 @@ export const getDefaultState = (): AppState => {
     checkedActionItems: {},
     completedSessionKeys: [],
     activeSprintTimer: {
-      activeStep: 0,
+      activeStep: 1,
       b1Seconds: 45 * 60,
       b1Running: false,
       breatherSeconds: 5 * 60,
@@ -63,13 +63,18 @@ export const loadAppState = (): AppState => {
     if (!raw) return getDefaultState();
     const parsed = JSON.parse(raw);
     const defaultState = getDefaultState();
+    const loadedTimer = {
+      ...defaultState.activeSprintTimer!,
+      ...(parsed.activeSprintTimer || {})
+    };
+    if (loadedTimer.activeStep === 0) {
+      loadedTimer.activeStep = 1;
+    }
+
     return {
       ...defaultState,
       ...parsed,
-      activeSprintTimer: {
-        ...defaultState.activeSprintTimer!,
-        ...(parsed.activeSprintTimer || {})
-      },
+      activeSprintTimer: loadedTimer,
       checkedActionItems: parsed.checkedActionItems || {},
       completedSessionKeys: parsed.completedSessionKeys || [],
       customTasks: parsed.customTasks || {},

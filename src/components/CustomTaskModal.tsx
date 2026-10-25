@@ -60,49 +60,48 @@ export const CustomTaskModal: React.FC<CustomTaskModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm font-mono">
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-          className={`w-full max-w-md rounded-t-[32px] sm:rounded-3xl border p-5 max-h-[90vh] overflow-y-auto ${
-            isDark ? 'bg-slate-900 border-white/[0.08] text-slate-100 shadow-2xl' : 'bg-white border-slate-200 text-slate-900 shadow-xl'
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.15 }}
+          className={`w-full max-w-md border p-6 max-h-[90vh] overflow-y-auto ${
+            isDark ? 'bg-[#09090B] border-neutral-800 text-neutral-100 shadow-2xl' : 'bg-white border-neutral-300 text-neutral-900 shadow-xl'
           }`}
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-neutral-200 dark:border-neutral-800">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+              <div className="w-8 h-8 border border-neutral-300 dark:border-neutral-700 flex items-center justify-center">
                 <Plus className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="text-sm font-black">Add Custom Weekend Task</h3>
-                <p className="text-[11px] text-slate-400">Week {currentWeek} • {day.toUpperCase()}</p>
+                <span className="text-[10px] uppercase tracking-widest text-neutral-500 block">Task Registry</span>
+                <h3 className="font-display text-sm font-bold uppercase tracking-tight">Append Custom Task</h3>
               </div>
             </div>
-            <motion.button
-              whileTap={{ scale: 0.85 }}
+            <button
               onClick={() => {
                 sound.playTactileClick();
                 onClose();
               }}
-              className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400"
+              className="p-1 border border-neutral-700 hover:border-white text-neutral-400"
             >
               <X className="w-4 h-4" />
-            </motion.button>
+            </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3.5">
+          <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
             <div>
-              <label className="block text-[11px] font-extrabold text-slate-400 mb-1">Task Title *</label>
+              <label className="block text-[10px] uppercase tracking-wider text-neutral-500 mb-1">Task Title *</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Implement Trie with Prefix Search in Python"
-                className={`w-full p-3 rounded-2xl text-xs border focus:outline-none focus:ring-1 focus:ring-indigo-500 ${
-                  isDark ? 'bg-slate-950 border-white/[0.08] text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-900'
+                placeholder="e.g. Implement Trie with Prefix Search from memory"
+                className={`w-full p-3 border text-xs focus:outline-none ${
+                  isDark ? 'bg-neutral-950 border-neutral-800 text-white focus:border-white' : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-950'
                 }`}
               />
             </div>
@@ -182,24 +181,23 @@ export const CustomTaskModal: React.FC<CustomTaskModalProps> = ({
             </div>
 
             <div className="pt-2 flex items-center gap-2">
-              <motion.button
-                whileTap={{ scale: 0.95 }}
+              <button
                 type="button"
                 onClick={onClose}
-                className={`flex-1 py-3 rounded-2xl text-xs font-bold border ${
-                  isDark ? 'border-white/10 text-slate-400' : 'border-slate-300 text-slate-600'
+                className={`flex-1 py-3 border text-xs font-bold uppercase tracking-wider ${
+                  isDark ? 'border-neutral-800 text-neutral-400 hover:text-white' : 'border-neutral-300 text-neutral-600 hover:text-black'
                 }`}
               >
                 Cancel
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.96 }}
+              </button>
+              <button
                 type="submit"
-                className="flex-1 py-3 rounded-2xl text-xs font-black bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-600/30"
+                className={`flex-1 py-3 border text-xs font-bold uppercase tracking-wider ${
+                  isDark ? 'border-white bg-white text-neutral-950 hover:bg-neutral-200' : 'border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800'
+                }`}
               >
-                Add Task
-              </motion.button>
+                Append Task
+              </button>
             </div>
           </form>
         </motion.div>

@@ -89,158 +89,149 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm font-mono">
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ type: 'spring', stiffness: 450, damping: 30 }}
-          className={`w-full max-w-md rounded-t-[32px] sm:rounded-3xl border p-5 max-h-[90vh] overflow-y-auto ${
-            isDark ? 'bg-slate-900 border-white/[0.08] text-slate-100 shadow-2xl' : 'bg-white border-slate-200 text-slate-900 shadow-xl'
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.15 }}
+          className={`w-full max-w-md border p-6 max-h-[90vh] overflow-y-auto ${
+            isDark ? 'bg-[#09090B] border-neutral-800 text-neutral-100 shadow-2xl' : 'bg-white border-neutral-300 text-neutral-900 shadow-xl'
           }`}
         >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className={`text-sm font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              Settings & Career Guide
-            </h3>
-            <motion.button
-              whileTap={{ scale: 0.85 }}
+          <div className="flex items-center justify-between pb-3 mb-4 border-b border-neutral-200 dark:border-neutral-800">
+            <div>
+              <span className="text-[10px] uppercase tracking-widest text-neutral-500 block">System Parameters</span>
+              <h3 className="font-display text-sm font-bold uppercase tracking-tight">
+                Settings & Philosophy
+              </h3>
+            </div>
+            <button
               onClick={() => {
                 sound.playTactileClick();
                 onClose();
               }}
               aria-label="Close settings"
-              className={`p-1.5 rounded-full transition-colors ${
-                isDark ? 'hover:bg-slate-800 text-slate-400' : 'hover:bg-slate-100 text-slate-500'
-              }`}
+              className="p-1 border border-neutral-700 hover:border-white text-neutral-400"
             >
               <X className="w-4 h-4" />
-            </motion.button>
+            </button>
           </div>
 
           {/* 1. Philosophy Card */}
-          <div className={`p-4 rounded-3xl mb-4 border ${
-            isDark ? 'bg-slate-950/80 border-white/[0.08] text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+          <div className={`p-4 mb-4 border ${
+            isDark ? 'bg-neutral-950 border-neutral-800 text-neutral-300' : 'bg-neutral-50 border-neutral-200 text-neutral-700'
           }`}>
-            <div className="flex items-center gap-1.5 font-black text-xs text-amber-500 mb-1">
+            <div className="flex items-center gap-1.5 font-bold text-xs uppercase text-amber-500 mb-1.5">
               <BookOpen className="w-3.5 h-3.5" />
-              <span>The 90-Minute Weekend Philosophy</span>
+              <span>Architectural Protocol // 90-Minute Cadence</span>
             </div>
-            <p className="text-[11px] leading-relaxed select-text">
-              Transitioning from <strong>7.5 LPA</strong> (ADP Member Tech) to <strong>20+ LPA</strong> (Senior Applied AI) requires no-burnout consistency:
+            <p className="text-[11px] leading-relaxed select-text font-mono">
+              Transitioning from <strong>7.5 LPA</strong> (ADP Member Tech) to <strong>20+ LPA</strong> (Staff Applied AI) requires deliberate practice:
             </p>
-            <ul className={`text-[11px] mt-2 space-y-1 list-disc list-inside select-text ${
-              isDark ? 'text-slate-400' : 'text-slate-600'
+            <ul className={`text-[11px] mt-2 space-y-1 list-disc list-inside select-text font-mono ${
+              isDark ? 'text-neutral-400' : 'text-neutral-600'
             }`}>
-              <li><strong>Mon–Fri:</strong> Work at ADP + 10-minute No-AI Debugging Rule.</li>
-              <li><strong>Saturday 90m:</strong> Raw DSA Coding & Manual Backend (AI Off).</li>
-              <li><strong>Sunday 90m:</strong> System Design (HLD) & Applied AI Portfolio.</li>
+              <li><strong>Mon–Fri:</strong> 10-Minute Manual Debugging Protocol before AI.</li>
+              <li><strong>Saturday 90m:</strong> Pure Algorithmic Recall & Manual Backend Fluency.</li>
+              <li><strong>Sunday 90m:</strong> High-Level Distributed Architecture & Applied AI.</li>
             </ul>
           </div>
 
           {/* 2. Sound Toggle */}
-          <div className={`flex items-center justify-between py-2 border-b mb-3 ${
-            isDark ? 'border-white/[0.06]' : 'border-slate-200'
+          <div className={`flex items-center justify-between py-3 border-b mb-4 ${
+            isDark ? 'border-neutral-800' : 'border-neutral-200'
           }`}>
-            <span className={`text-xs font-bold flex items-center gap-2 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}>
-              {state.soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-500" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
-              Audio Chimes & Synthesizer
+            <span className="text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+              {state.soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-500" /> : <VolumeX className="w-4 h-4 text-neutral-400" />}
+              Procedural Audio & Synthesizer
             </span>
-            <motion.button
-              whileTap={{ scale: 0.95 }}
+            <button
               onClick={toggleSound}
-              className={`px-3 py-1 rounded-xl text-xs font-black border transition-colors ${
+              className={`px-3 py-1 text-xs font-bold uppercase border transition-colors ${
                 state.soundEnabled
                   ? isDark 
-                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
-                    : 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                    ? 'border-emerald-600 bg-emerald-950 text-emerald-300' 
+                    : 'border-emerald-500 bg-emerald-50 text-emerald-800'
                   : isDark 
-                    ? 'bg-slate-800 text-slate-400 border-white/10' 
-                    : 'bg-slate-100 text-slate-600 border-slate-200'
+                    ? 'bg-neutral-900 text-neutral-500 border-neutral-800' 
+                    : 'bg-neutral-100 text-neutral-600 border-neutral-300'
               }`}
             >
               {state.soundEnabled ? 'Enabled' : 'Muted'}
-            </motion.button>
+            </button>
           </div>
 
           {/* 3. Export JSON Backup */}
           <div className="mb-4">
-            <span className={`text-xs font-bold block mb-1 ${
-              isDark ? 'text-slate-300' : 'text-slate-700'
-            }`}>
-              Data Backup & Export:
+            <span className="text-[10px] uppercase tracking-widest text-neutral-500 block mb-1.5">
+              Archival Backup & Export:
             </span>
             <div className="grid grid-cols-2 gap-2">
-              <motion.button
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={handleDownloadBackup}
-                className={`py-2.5 px-3 rounded-2xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
-                  isDark ? 'bg-slate-800 hover:bg-slate-700 border-white/10 text-slate-200' : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                className={`py-2.5 px-3 border text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
+                  isDark ? 'bg-neutral-900 hover:bg-neutral-800 border-neutral-700 text-neutral-200' : 'bg-neutral-100 hover:bg-neutral-200 border-neutral-300 text-neutral-800'
                 }`}
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download JSON</span>
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.95 }}
+              </button>
+              <button
                 onClick={handleCopyJson}
-                className={`py-2.5 px-3 rounded-2xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
-                  isDark ? 'bg-slate-800 hover:bg-slate-700 border-white/10 text-slate-200' : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700'
+                className={`py-2.5 px-3 border text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
+                  isDark ? 'bg-neutral-900 hover:bg-neutral-800 border-neutral-700 text-neutral-200' : 'bg-neutral-100 hover:bg-neutral-200 border-neutral-300 text-neutral-800'
                 }`}
               >
                 {copiedJson ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedJson ? 'Copied!' : 'Copy to Clip'}</span>
-              </motion.button>
+              </button>
             </div>
           </div>
 
           {/* 4. Import JSON */}
           <div className="mb-4">
-            <span className={`text-xs font-bold block mb-1 ${
-              isDark ? 'text-slate-300' : 'text-slate-700'
-            }`}>
-              Import State from JSON:
+            <span className="text-[10px] uppercase tracking-widest text-neutral-500 block mb-1.5">
+              Restore State from JSON Dossier:
             </span>
             <textarea
               rows={2}
               value={importText}
               onChange={(e) => setImportText(e.target.value)}
-              placeholder="Paste exported JSON here to restore progress..."
-              className={`w-full p-2.5 rounded-2xl text-[11px] font-mono border focus:outline-none focus:ring-1 focus:ring-indigo-500 mb-2 select-text ${
-                isDark ? 'bg-slate-950 border-white/[0.08] text-slate-200' : 'bg-slate-50 border-slate-300 text-slate-900'
+              placeholder="Paste exported JSON dossier here..."
+              className={`w-full p-2.5 text-[11px] font-mono border focus:outline-none mb-2 select-text ${
+                isDark ? 'bg-neutral-950 border-neutral-800 text-white focus:border-white' : 'bg-neutral-50 border-neutral-300 text-neutral-900 focus:border-neutral-950'
               }`}
             />
             {importError && (
-              <div className="text-[11px] text-rose-400 font-semibold mb-2">Error: {importError}</div>
+              <div className="text-[11px] text-red-500 font-bold mb-2">Error: {importError}</div>
             )}
             {importSuccess && (
-              <div className="text-[11px] text-emerald-400 font-semibold mb-2">Successfully restored!</div>
+              <div className="text-[11px] text-emerald-400 font-bold mb-2">Successfully restored!</div>
             )}
-            <motion.button
-              whileTap={{ scale: 0.96 }}
+            <button
               onClick={handleImport}
               disabled={!importText.trim()}
-              className="w-full py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 disabled:opacity-40 shadow-md shadow-indigo-600/20"
+              className={`w-full py-2.5 border text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 disabled:opacity-40 transition-colors ${
+                isDark ? 'border-neutral-700 bg-neutral-900 text-white hover:bg-neutral-800' : 'border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800'
+              }`}
             >
               <Upload className="w-3.5 h-3.5" />
               <span>Restore Backup</span>
-            </motion.button>
+            </button>
           </div>
 
           {/* 5. Reset Demo Data */}
-          <div className={`pt-2 border-t ${
-            isDark ? 'border-white/[0.06]' : 'border-slate-200'
+          <div className={`pt-3 border-t ${
+            isDark ? 'border-neutral-800' : 'border-neutral-200'
           }`}>
-            <motion.button
-              whileTap={{ scale: 0.96 }}
+            <button
               onClick={handleReset}
-              className="w-full py-3 rounded-2xl border border-rose-500/30 bg-rose-500/10 text-rose-400 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-rose-500/20 transition-colors"
+              className="w-full py-3 border border-red-900/60 bg-red-950/20 text-red-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:bg-red-950/40 transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset Demo Data & Progress</span>
-            </motion.button>
+              <span>Reset State & Restore Demo Data</span>
+            </button>
           </div>
         </motion.div>
       </div>

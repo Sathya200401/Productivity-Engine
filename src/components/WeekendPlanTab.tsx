@@ -31,7 +31,7 @@ export const WeekendPlanTab: React.FC<WeekendPlanTabProps> = ({
   const activeDayPlan = state.selectedDay === 'saturday' ? currentWeekData.saturday : currentWeekData.sunday;
 
   const dayKey = `week-${state.currentWeek}-${state.selectedDay}`;
-  const isShieldUnlocked = !!state.dopamineShieldStatus[dayKey];
+  const isShieldUnlocked = !!state.dopamineShieldStatus?.[dayKey];
 
   const [reflectionText, setReflectionText] = useState(state.reflections[dayKey] || '');
   const [reflectionSaved, setReflectionSaved] = useState(false);
@@ -59,8 +59,8 @@ export const WeekendPlanTab: React.FC<WeekendPlanTabProps> = ({
     onUpdateState(prev => ({
       ...prev,
       dopamineShieldStatus: {
-        ...prev.dopamineShieldStatus,
-        [dayKey]: !prev.dopamineShieldStatus[dayKey]
+        ...(prev.dopamineShieldStatus || {}),
+        [dayKey]: !prev.dopamineShieldStatus?.[dayKey]
       }
     }));
   };
